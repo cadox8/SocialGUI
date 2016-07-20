@@ -1,0 +1,9 @@
+name: SocialGUI
+main: com.gmail.cadox8.socialgui.SocialGUI
+version: 0.8.2
+author: cadox8
+
+commands:
+     socialgui:
+       description: Main CMD
+       aliases: [social]
