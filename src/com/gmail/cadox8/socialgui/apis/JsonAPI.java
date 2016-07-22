@@ -12,9 +12,23 @@ import com.gmail.cadox8.socialgui.utils.Messages;
 
 public class JsonAPI {
 
+	public static void jsonURL2(Player p, String text, String hover, ChatColor color2, String url){
+		TextComponent message = new TextComponent(text);
+		message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+		message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(color2 + hover).create()));
+		p.spigot().sendMessage(message);
+	}
+
 	public static void jsonURL(Player p, String text, String hover, ChatColor color, ChatColor color2, String url){
 		TextComponent message = new TextComponent(Messages.prefix + color + text);
 		message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+		message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(color2 + hover).create()));
+		p.spigot().sendMessage(message);
+	}
+
+	public static void jsonMessages2(Player p, String text, String hover, ChatColor color2, String command){
+		TextComponent message = new TextComponent(text);
+		message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
 		message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(color2 + hover).create()));
 		p.spigot().sendMessage(message);
 	}

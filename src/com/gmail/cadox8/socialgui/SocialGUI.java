@@ -5,8 +5,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.cadox8.socialgui.cmd.Help;
+import com.gmail.cadox8.socialgui.events.Chat;
 import com.gmail.cadox8.socialgui.events.Interact;
 import com.gmail.cadox8.socialgui.files.Files;
+import com.gmail.cadox8.socialgui.utils.Checks;
 import com.gmail.cadox8.socialgui.utils.Messages;
 
 public class SocialGUI extends JavaPlugin {
@@ -16,6 +18,7 @@ public class SocialGUI extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
+		Checks.addBlocks();
 		Files.setupFiles();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Setup Files Complete");
 
@@ -42,12 +45,12 @@ public class SocialGUI extends JavaPlugin {
 		Bukkit.getConsoleSender().sendMessage(" ");
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Saving Files. . .");
-		Files.setupFiles();
+		//	Files.setupFiles();
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Files Saved");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 
-		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "SocialGUI disbaled");
+		Bukkit.getConsoleSender().sendMessage(Messages.prefix + ChatColor.RED + "SocialGUI disabled");
 
 		Bukkit.getConsoleSender().sendMessage(" ");
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
@@ -59,5 +62,6 @@ public class SocialGUI extends JavaPlugin {
 
 	private void registerEvents(){
 		new Interact(this);
+		new Chat(this);
 	}
 }

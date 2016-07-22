@@ -36,6 +36,8 @@ public class Interact implements Listener {
 				return;
 			}
 
+			e.setCancelled(true);
+
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getNextItem().getItemMeta().getDisplayName())) {
 				e.setCancelled(true);
 				p.closeInventory();
