@@ -29,6 +29,7 @@ public class Help implements CommandExecutor {
 
 		if (cmd.getName().equalsIgnoreCase("socialgui") && ((sender instanceof Player))) {
 			if (args.length == 0) {
+				Files.saveFiles();
 				GUI.playerPage.put(p, 1);
 
 				GUI.openGUI(p, GUI.playerPage.get(p));
@@ -46,16 +47,16 @@ public class Help implements CommandExecutor {
 					}
 
 					if (!Files.social.contains("social.type_" + id)) {
-						p.sendMessage(Messages.prefix + ChatColor.RED + "There is not link with this id");
+						p.sendMessage(Messages.noLinkID);
 						return true;
 					}
 
 					for (Player pl : Bukkit.getOnlinePlayers()) {
 						if (pl.hasPermission("socialgui.admin")) {
 							pl.playSound(pl.getLocation(), Sound.BLOCK_NOTE_PLING, 5.0F, 5.0F);
-							pl.sendMessage(Messages.prefix + ChatColor.YELLOW + p.getName() + ChatColor.RED + " has just reported the link wit id " + ChatColor.YELLOW + id);
-							JsonAPI.jsonURL(pl, "[Click to open link]", Files.social.getString("social.link_" + id), ChatColor.DARK_GREEN, ChatColor.LIGHT_PURPLE, Files.social.getString("social.link_" + id));
-							JsonAPI.jsonMessages(pl, ChatColor.DARK_RED + "[Click to delete link]", Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, "/social delete " + id);
+							pl.sendMessage(Messages.reportLink.replace("%player%", p.getName()).replace("%id%", id + ""));
+							JsonAPI.jsonURL2(pl, Messages.openLink, Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, Files.social.getString("social.link_" + id));
+							JsonAPI.jsonMessages2(pl, Messages.deleteLink, Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, "/social delete " + id);
 
 							int id2 = Files.rep.getInt("id");
 
@@ -85,24 +86,25 @@ public class Help implements CommandExecutor {
 
 						Files.saveFiles();
 
-						p.sendMessage(Messages.prefix + ChatColor.GREEN + "Deleted id " + ChatColor.GOLD + id);
+						p.sendMessage(Messages.deletedLink.replace("%id", id + ""));
 					}
 
 					if (args[0].equalsIgnoreCase("give")) {
 						String type = args[1].toLowerCase();
 
 						if (!Checks.exitType(type)) {
-							p.sendMessage(Messages.prefix + ChatColor.RED + "Please, insert a valid type");
+							p.sendMessage(Messages.validType);
 							List<String> types = new ArrayList<String>();
 
 							for (ItemsLink il : ItemsLink.values()) {
 								types.add(il.toString().toLowerCase());
 							}
 
-							p.sendMessage(Messages.prefix + ChatColor.AQUA + "Types: " + ChatColor.YELLOW + types.toString());
+							p.sendMessage(Messages.prefix + ChatColor.YELLOW + types.toString());
 							return true;
 						}
 
+						p.sendMessage(Messages.giveSkull);
 						p.getInventory().addItem(SkullManager.getSkull(type, ChatColor.AQUA + WordUtils.capitalizeFully(type), Arrays.asList("")));
 					}
 				}
@@ -115,24 +117,24 @@ public class Help implements CommandExecutor {
 					int id = Files.social.getInt("id");
 
 					if (!link.startsWith("http://") || !link.contains(".")) {
-						p.sendMessage(Messages.prefix + ChatColor.RED + "Please, insert a valid link (with http:// and .something)");
+						p.sendMessage(Messages.validLink);
 						return true;
 					}
 
 					if (!Checks.exitType(type)) {
-						p.sendMessage(Messages.prefix + ChatColor.RED + "Please, insert a valid type");
+						p.sendMessage(Messages.validType);
 						List<String> types = new ArrayList<String>();
 
 						for (ItemsLink il : ItemsLink.values()) {
 							types.add(il.toString().toLowerCase());
 						}
 
-						p.sendMessage(Messages.prefix + ChatColor.AQUA + "Types: " + ChatColor.YELLOW + types.toString());
+						p.sendMessage(Messages.prefix + ChatColor.YELLOW + types.toString());
 						return true;
 					}
 
 					if (BlockLinks.isBlockedLink(link)) {
-						p.sendMessage(Messages.prefix + ChatColor.RED + "Sorry, but you can't put this link");
+						p.sendMessage(Messages.blockedLink.replace("link", link));
 						return true;
 					}
 
@@ -146,7 +148,7 @@ public class Help implements CommandExecutor {
 
 					Files.saveFiles();
 
-					p.sendMessage(Messages.prefix + ChatColor.GREEN + "Added " + ChatColor.RED + type + ChatColor.GREEN + " with link " + ChatColor.AQUA + link);
+					p.sendMessage(Messages.addLink.replace("%link%", link).replace("%type%", type));
 				}
 			}
 		}
