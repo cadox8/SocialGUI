@@ -23,6 +23,10 @@ public class SkullManager {
 			return new SkullMaker().withSkinUrl(ItemsLink.SKYPE.getLink()).withLore(lore).withName(name).build();
 		case "youtube":
 			return new SkullMaker().withSkinUrl(ItemsLink.YOUTUBE.getLink()).withLore(lore).withName(name).build();
+		case "snapchat":
+			return new SkullMaker().withSkinUrl(ItemsLink.SNAPCHAT.getLink()).withLore(lore).withName(name).build();
+		case "reddit":
+			return new SkullMaker().withSkinUrl(ItemsLink.REDDIT.getLink()).withLore(lore).withName(name).build();
 		default:
 			return new ItemStack(Material.AIR);
 		}

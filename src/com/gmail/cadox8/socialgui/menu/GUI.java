@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.cadox8.socialgui.files.Files;
 import com.gmail.cadox8.socialgui.utils.Messages;
+import com.gmail.cadox8.socialgui.utils.SkullMaker;
 import com.gmail.cadox8.socialgui.utils.SkullManager;
 
 public class GUI {
@@ -34,6 +35,9 @@ public class GUI {
 		for (ItemStack i : items) {
 			inv.addItem(i);
 		}
+
+		inv.setItem(45, getTypeSearch());
+		inv.setItem(53, getUserSearch());
 
 		if (page == 1 && Math.round(tot / 45) >= 1) {
 			inv.setItem(50, getNextItem());
@@ -63,6 +67,21 @@ public class GUI {
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Prev Page");
 		i.setItemMeta(im);
+
+		return i;
+	}
+
+	public static ItemStack getUserSearch(){
+		ItemStack i = new ItemStack(Material.SIGN);
+		ItemMeta im = i.getItemMeta();
+		im.setDisplayName(ChatColor.RED + "Search By Player Name (WIP)");
+		i.setItemMeta(im);
+
+		return i;
+	}
+
+	public static ItemStack getTypeSearch(){
+		ItemStack i = new SkullMaker().withSkinUrl("http://textures.minecraft.net/texture/843a77fd2ab245303ed2d1b26563ebc4653af4139a2b3daef15a8cc7defd0").withName(ChatColor.RED + "Search By Type (WIP)").build();
 
 		return i;
 	}
