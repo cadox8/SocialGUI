@@ -13,9 +13,13 @@ import com.gmail.cadox8.socialgui.utils.Messages;
 
 public class SocialGUI extends JavaPlugin {
 
+	private static SocialGUI plugin;
+
 	public void onEnable(){
 		Bukkit.getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "========================");
 		Bukkit.getConsoleSender().sendMessage(" ");
+
+		plugin = this;
 
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Checking and Creating files. . .");
 		Checks.addBlocks();
@@ -63,5 +67,9 @@ public class SocialGUI extends JavaPlugin {
 	private void registerEvents(){
 		new Interact(this);
 		new Chat(this);
+	}
+
+	public static SocialGUI getPlugin(){
+		return SocialGUI.plugin;
 	}
 }

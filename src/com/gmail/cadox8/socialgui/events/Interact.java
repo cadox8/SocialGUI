@@ -26,7 +26,7 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onInteractGUI(InventoryClickEvent e){
-		Player p = (Player) e.getWhoClicked();
+		final Player p = (Player) e.getWhoClicked();
 
 		if (e.getInventory().getName().equals(ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")))) {
 			if (e.getCurrentItem() == null) {
@@ -37,6 +37,40 @@ public class Interact implements Listener {
 			}
 
 			e.setCancelled(true);
+
+			//Search
+
+			//			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getUserSearch().getItemMeta().getDisplayName())) {
+			//				e.setCancelled(true);
+			//				p.closeInventory();
+			//
+			//				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
+			//					@Override
+			//					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
+			//						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+			//							event.setWillClose(true);
+			//							event.setWillDestroy(true);
+			//
+			//							p.sendMessage(event.getName()); //Test
+			//						} else {
+			//							event.setWillClose(false);
+			//							event.setWillDestroy(false);
+			//						}
+			//					}
+			//				});
+			//
+			//				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+			//
+			//				try {
+			//					gui.open();
+			//				} catch (IllegalAccessException | InvocationTargetException | InstantiationException e1) {
+			//					e1.printStackTrace();
+			//				}
+			//
+			//				return;
+			//			}
+
+			//Pages
 
 			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getNextItem().getItemMeta().getDisplayName())) {
 				e.setCancelled(true);
@@ -56,13 +90,15 @@ public class Interact implements Listener {
 				return;
 			}
 
+			//Items
+
 			if (e.getCurrentItem().getItemMeta().getLore().get(2) != null && e.getClick() == ClickType.SHIFT_RIGHT) {
 				e.setCancelled(true);
 				p.closeInventory();
 
 				int id = Integer.parseInt(e.getCurrentItem().getItemMeta().getLore().get(2));
 
-				JsonAPI.jsonMessages(p, ChatColor.DARK_RED + "[Click to delete link]", Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, "/social delete " + id);
+				JsonAPI.jsonMessages(p, Messages.prefix + ChatColor.DARK_RED + "[Click to delete link]", ChatColor.LIGHT_PURPLE + Files.social.getString("social.link_" + id), "/social delete " + id);
 			}
 
 			if (e.getCurrentItem().getItemMeta().getLore().get(2) != null && e.getClick() == ClickType.LEFT) {
@@ -77,7 +113,7 @@ public class Interact implements Listener {
 
 				p.sendMessage(Messages.prefix + ChatColor.RED + "WARNING: The server is not responsable about the links posted in this plugin. We will check all to prevent extrange links. Also, you can report them using /social report <id>");
 
-				JsonAPI.jsonURL(p, ChatColor.GREEN + "Click to open " + ChatColor.AQUA + type + ChatColor.GREEN + " link posted by the player " + ChatColor.YELLOW + player + ChatColor.GREEN + " (if not openned yet)", Files.social.getString("social.link_" + id), ChatColor.GREEN, ChatColor.RED, Files.social.getString("social.link_" + id));
+				JsonAPI.jsonURL(p, Messages.prefix + ChatColor.GREEN + "Click to open " + ChatColor.AQUA + type + ChatColor.GREEN + " link posted by the player " + ChatColor.YELLOW + player + ChatColor.GREEN + " (if not openned yet)", ChatColor.RED + Files.social.getString("social.link_" + id), Files.social.getString("social.link_" + id));
 			}
 		}
 	}

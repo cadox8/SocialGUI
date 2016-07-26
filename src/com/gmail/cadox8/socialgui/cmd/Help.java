@@ -55,8 +55,8 @@ public class Help implements CommandExecutor {
 						if (pl.hasPermission("socialgui.admin")) {
 							pl.playSound(pl.getLocation(), Sound.BLOCK_NOTE_PLING, 5.0F, 5.0F);
 							pl.sendMessage(Messages.reportLink.replace("%player%", p.getName()).replace("%id%", id + ""));
-							JsonAPI.jsonURL2(pl, Messages.openLink, Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, Files.social.getString("social.link_" + id));
-							JsonAPI.jsonMessages2(pl, Messages.deleteLink, Files.social.getString("social.link_" + id), ChatColor.LIGHT_PURPLE, "/social delete " + id);
+							JsonAPI.jsonURL(pl, Messages.openLink, ChatColor.LIGHT_PURPLE + Files.social.getString("social.link_" + id), Files.social.getString("social.link_" + id));
+							JsonAPI.jsonMessages(pl, Messages.deleteLink, ChatColor.LIGHT_PURPLE + Files.social.getString("social.link_" + id), "/social delete " + id);
 
 							int id2 = Files.rep.getInt("id");
 
