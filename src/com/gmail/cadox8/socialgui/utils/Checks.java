@@ -4,7 +4,7 @@ import com.gmail.cadox8.socialgui.events.Chat;
 
 public class Checks {
 
-	public static boolean exitType(String type){
+	public static boolean existType(String type){
 		for (ItemsLink il : ItemsLink.values()) {
 			if (il.toString().toLowerCase().equalsIgnoreCase(type)) {
 				return true;

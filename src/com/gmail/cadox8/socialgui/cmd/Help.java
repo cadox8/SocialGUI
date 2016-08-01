@@ -92,7 +92,7 @@ public class Help implements CommandExecutor {
 					if (args[0].equalsIgnoreCase("give")) {
 						String type = args[1].toLowerCase();
 
-						if (!Checks.exitType(type)) {
+						if (!Checks.existType(type)) {
 							p.sendMessage(Messages.validType);
 							List<String> types = new ArrayList<String>();
 
@@ -121,7 +121,7 @@ public class Help implements CommandExecutor {
 						return true;
 					}
 
-					if (!Checks.exitType(type)) {
+					if (!Checks.existType(type)) {
 						p.sendMessage(Messages.validType);
 						List<String> types = new ArrayList<String>();
 

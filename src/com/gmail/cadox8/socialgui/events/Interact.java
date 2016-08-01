@@ -1,17 +1,26 @@
 package com.gmail.cadox8.socialgui.events;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.gmail.cadox8.socialgui.SocialGUI;
 import com.gmail.cadox8.socialgui.apis.JsonAPI;
 import com.gmail.cadox8.socialgui.files.Files;
 import com.gmail.cadox8.socialgui.menu.GUI;
+import com.gmail.cadox8.socialgui.nms.AnvilGUI;
+import com.gmail.cadox8.socialgui.utils.Checks;
+import com.gmail.cadox8.socialgui.utils.ItemsLink;
 import com.gmail.cadox8.socialgui.utils.Links;
 import com.gmail.cadox8.socialgui.utils.Messages;
 
@@ -24,11 +33,14 @@ public class Interact implements Listener {
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
 	}
 
+	private String player;
+	private String type;
+
 	@EventHandler
 	public void onInteractGUI(InventoryClickEvent e){
 		final Player p = (Player) e.getWhoClicked();
 
-		if (e.getInventory().getName().equals(ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")))) {
+		if (e.getInventory().getName().contains(ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")))) {
 			if (e.getCurrentItem() == null) {
 				return;
 			}
@@ -40,35 +52,91 @@ public class Interact implements Listener {
 
 			//Search
 
-			//			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getUserSearch().getItemMeta().getDisplayName())) {
-			//				e.setCancelled(true);
-			//				p.closeInventory();
-			//
-			//				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
-			//					@Override
-			//					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
-			//						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
-			//							event.setWillClose(true);
-			//							event.setWillDestroy(true);
-			//
-			//							p.sendMessage(event.getName()); //Test
-			//						} else {
-			//							event.setWillClose(false);
-			//							event.setWillDestroy(false);
-			//						}
-			//					}
-			//				});
-			//
-			//				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
-			//
-			//				try {
-			//					gui.open();
-			//				} catch (IllegalAccessException | InvocationTargetException | InstantiationException e1) {
-			//					e1.printStackTrace();
-			//				}
-			//
-			//				return;
-			//			}
+			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getUserSearch().getItemMeta().getDisplayName())) {
+				e.setCancelled(true);
+				p.closeInventory();
+
+				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
+					@Override
+					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
+						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+							event.setWillClose(true);
+							event.setWillDestroy(true);
+
+							player = "";
+							player = event.getName();
+
+						} else {
+							event.setWillClose(false);
+							event.setWillDestroy(false);
+						}
+
+						GUI.playerPage.put(p, 1);
+
+						GUI.openGUIPlayer(p, GUI.playerPage.get(p), player);
+					}
+				});
+
+				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+
+				try {
+					gui.open();
+				} catch (IllegalAccessException | InvocationTargetException | InstantiationException e1) {
+					e1.printStackTrace();
+				}
+
+				return;
+			}
+			if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getTypeSearch().getItemMeta().getDisplayName())) {
+				e.setCancelled(true);
+				p.closeInventory();
+
+				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
+
+					@Override
+					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
+						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+							event.setWillClose(true);
+							event.setWillDestroy(true);
+
+							if (!Checks.existType(event.getName())) {
+								p.sendMessage(Messages.validType);
+								List<String> types = new ArrayList<String>();
+
+								for (ItemsLink il : ItemsLink.values()) {
+									types.add(il.toString().toLowerCase());
+								}
+
+								p.sendMessage(Messages.prefix + ChatColor.YELLOW + types.toString());
+								return;
+							}
+
+							GUI.playerPage.put(p, 1);
+
+							type = "";
+							type = event.getName();
+
+							GUI.openGUIType(p, GUI.playerPage.get(p), type);
+
+						} else {
+							event.setWillClose(false);
+							event.setWillDestroy(false);
+						}
+					}
+				});
+
+				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+
+				try {
+					gui.open();
+				} catch (IllegalAccessException | InvocationTargetException |
+
+						InstantiationException e1) {
+					e1.printStackTrace();
+				}
+
+				return;
+			}
 
 			//Pages
 
