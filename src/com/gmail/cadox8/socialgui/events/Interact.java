@@ -3,6 +3,7 @@ package com.gmail.cadox8.socialgui.events;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
@@ -56,34 +57,46 @@ public class Interact implements Listener {
 				e.setCancelled(true);
 				p.closeInventory();
 
-				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
+				new net.wesjd.anvilgui.AnvilGUI(this.plugin, p, "Enter player name", new BiFunction<Player, String, String>() {
 					@Override
-					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
-						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
-							event.setWillClose(true);
-							event.setWillDestroy(true);
-
-							player = "";
-							player = event.getName();
-
-						} else {
-							event.setWillClose(false);
-							event.setWillDestroy(false);
-						}
+					public String apply(Player player, String reply){
 
 						GUI.playerPage.put(p, 1);
 
-						GUI.openGUIPlayer(p, GUI.playerPage.get(p), player);
+						GUI.openGUIPlayer(p, GUI.playerPage.get(p), reply);
+
+						return reply;
 					}
 				});
 
-				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
-
-				try {
-					gui.open();
-				} catch (IllegalAccessException | InvocationTargetException | InstantiationException e1) {
-					e1.printStackTrace();
-				}
+				//				AnvilGUI gui = new AnvilGUI(p, new AnvilGUI.AnvilClickEventHandler() {
+				//					@Override
+				//					public void onAnvilClick(AnvilGUI.AnvilClickEvent event){
+				//						if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+				//							event.setWillClose(true);
+				//							event.setWillDestroy(true);
+				//
+				//							player = "";
+				//							player = event.getName();
+				//
+				//						} else {
+				//							event.setWillClose(false);
+				//							event.setWillDestroy(false);
+				//						}
+				//
+				//						GUI.playerPage.put(p, 1);
+				//
+				//						GUI.openGUIPlayer(p, GUI.playerPage.get(p), player);
+				//					}
+				//				});
+				//
+				//				gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+				//
+				//				try {
+				//					gui.open();
+				//				} catch (IllegalAccessException | InvocationTargetException | InstantiationException e1) {
+				//					e1.printStackTrace();
+				//				}
 
 				return;
 			}
