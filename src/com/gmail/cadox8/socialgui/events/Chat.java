@@ -11,11 +11,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.gmail.cadox8.socialgui.SocialGUI;
+import com.gmail.cadox8.socialgui.menu.GUI;
+import com.gmail.cadox8.socialgui.utils.ItemsLink;
 import com.gmail.cadox8.socialgui.utils.Messages;
 
 public class Chat implements Listener {
 
 	private SocialGUI plugin;
+
+	public static ArrayList<Player> onSearch = new ArrayList<Player>();
 
 	public Chat(SocialGUI Main){
 		this.plugin = Main;
@@ -34,20 +38,20 @@ public class Chat implements Listener {
 		Player p = e.getPlayer();
 		String message = e.getMessage();
 
-		if (!p.hasPermission("socialgui.admin")) {
+		if(!p.hasPermission("socialgui.admin")){
 			pattern = Pattern.compile(IPADDRESS_PATTERN);
 			String[] parts = message.split("\\s");
 
-			for (String s : parts) {
+			for(String s : parts){
 				matcher = pattern.matcher(s);
 
 				String[] check;
-				if (s.contains(":")) {
+				if(s.contains(":")){
 					check = s.split(":");
 
-					for (String g : check) {
+					for(String g : check){
 						matcher = pattern.matcher(g);
-						if (matcher.matches()) {
+						if(matcher.matches()){
 							p.sendMessage(Messages.notAllowed);
 							e.setCancelled(true);
 							return;
@@ -55,19 +59,32 @@ public class Chat implements Listener {
 					}
 				}
 
-				if (matcher.matches()) {
+				if(matcher.matches()){
 					p.sendMessage(Messages.notAllowed);
 					e.setCancelled(true);
 					return;
 				}
 
-				for (String nope : urlEnds) {
-					if (s.contains(nope)) {
+				for(String nope : urlEnds){
+					if(s.contains(nope)){
 						p.sendMessage(Messages.notAllowed);
 						e.setCancelled(true);
 						return;
 					}
 				}
+			}
+		}
+
+		if(onSearch.contains(p)){
+			String search = e.getMessage();
+
+			for(ItemsLink il : ItemsLink.values()){
+				if(il.toString().toLowerCase().equalsIgnoreCase(search)){
+					GUI.openGUIType(p, GUI.playerPage.get(p), il.toString());
+				}else{
+					GUI.openGUIPlayer(p, GUI.playerPage.get(p), search);
+				}
+				onSearch.remove(p);
 			}
 		}
 	}

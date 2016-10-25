@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import com.gmail.cadox8.socialgui.files.Files;
 import com.gmail.cadox8.socialgui.utils.Messages;
@@ -26,24 +27,26 @@ public class GUI {
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsPerPage(p, page);
 
-		if (items.isEmpty()) {
+		if(items.isEmpty()){
 			p.sendMessage(Messages.prefix + ChatColor.AQUA + "Sorry, but there aren't links to show");
 			return;
 		}
 
-		for (ItemStack i : items) {
+		for(ItemStack i : items){
 			inv.addItem(i);
 		}
 
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		if (page == 1 && Math.round(tot / 45) >= 1) {
+		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+
+		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
 		}
 
-		if (page >= 2) {
-			if (Math.round(tot / 45) >= page) {
+		if(page >= 2){
+			if(Math.round(tot / 45) >= page){
 				inv.setItem(50, getNextItem());
 			}
 			inv.setItem(47, getPrevItem());
@@ -57,24 +60,26 @@ public class GUI {
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsByPlayer(p, page, player);
 
-		if (items.isEmpty()) {
+		if(items.isEmpty()){
 			p.sendMessage(Messages.prefix + ChatColor.AQUA + "Sorry, but this player doesn't added links yet");
 			return;
 		}
 
-		for (ItemStack i : items) {
+		for(ItemStack i : items){
 			inv.addItem(i);
 		}
 
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		if (page == 1 && Math.round(tot / 45) >= 1) {
+		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+
+		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
 		}
 
-		if (page >= 2) {
-			if (Math.round(tot / 45) >= page) {
+		if(page >= 2){
+			if(Math.round(tot / 45) >= page){
 				inv.setItem(50, getNextItem());
 			}
 			inv.setItem(47, getPrevItem());
@@ -88,24 +93,26 @@ public class GUI {
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsByType(p, page, type);
 
-		if (items.isEmpty()) {
+		if(items.isEmpty()){
 			p.sendMessage(Messages.prefix + ChatColor.AQUA + "Sorry, but there aren't links with this type");
 			return;
 		}
 
-		for (ItemStack i : items) {
+		for(ItemStack i : items){
 			inv.addItem(i);
 		}
 
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		if (page == 1 && Math.round(tot / 45) >= 1) {
+		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+
+		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
 		}
 
-		if (page >= 2) {
-			if (Math.round(tot / 45) >= page) {
+		if(page >= 2){
+			if(Math.round(tot / 45) >= page){
 				inv.setItem(50, getNextItem());
 			}
 			inv.setItem(47, getPrevItem());
@@ -135,14 +142,24 @@ public class GUI {
 	public static ItemStack getUserSearch(){
 		ItemStack i = new ItemStack(Material.SIGN);
 		ItemMeta im = i.getItemMeta();
-		im.setDisplayName(ChatColor.RED + "Search By Player Name (WIP)");
+		im.setDisplayName(ChatColor.RED + "Search By Player Name");
 		i.setItemMeta(im);
 
 		return i;
 	}
 
 	public static ItemStack getTypeSearch(){
-		ItemStack i = new SkullMaker().withSkinUrl("http://textures.minecraft.net/texture/843a77fd2ab245303ed2d1b26563ebc4653af4139a2b3daef15a8cc7defd0").withName(ChatColor.RED + "Search By Type (WIP)").build();
+		ItemStack i = new SkullMaker().withSkinUrl("http://textures.minecraft.net/texture/843a77fd2ab245303ed2d1b26563ebc4653af4139a2b3daef15a8cc7defd0").withName(ChatColor.RED + "Search By Type").build();
+
+		return i;
+	}
+
+	public static ItemStack getUserLinks(Player p){
+		ItemStack i = new ItemStack(Material.SKULL, 1, (short) 3);
+		SkullMeta im = (SkullMeta) i.getItemMeta();
+		im.setOwner(p.getName());
+		im.setDisplayName(ChatColor.GOLD + "Get my links");
+		i.setItemMeta(im);
 
 		return i;
 	}

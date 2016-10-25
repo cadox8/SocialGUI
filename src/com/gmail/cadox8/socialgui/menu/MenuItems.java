@@ -24,18 +24,18 @@ public class MenuItems {
 
 		lore.add(ChatColor.GOLD + "Left Click to view");
 
-		if (p.hasPermission("socialgui.admin")) {
+		if(p.hasPermission("socialgui.admin")){
 			lore.add(ChatColor.RED + "Shift + Right Click to delete");
-		} else {
-			lore.add("");
+		}else{
+			lore.add(ChatColor.RED + "Right Click to report");
 		}
 
-		if (page == 1) {
-			for (int x = 1; x < min; x++) {
-				if (x > tot) {
+		if(page == 1){
+			for(int x = 1; x < min; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
 				lore.add(x + "");
@@ -44,12 +44,12 @@ public class MenuItems {
 			}
 		}
 
-		if (page >= 2) {
-			for (int x = (min * page) - min; x < min * page; x++) {
-				if (x > tot) {
+		if(page >= 2){
+			for(int x = (min * page) - min; x < min * page; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
 				lore.add(x + "");
@@ -72,21 +72,21 @@ public class MenuItems {
 
 		lore.add(ChatColor.GOLD + "Left Click to view");
 
-		if (p.hasPermission("socialgui.admin")) {
+		if(p.hasPermission("socialgui.admin")){
 			lore.add(ChatColor.RED + "Shift + Right Click to delete");
-		} else {
-			lore.add("");
+		}else{
+			lore.add(ChatColor.RED + "Right Click to report");
 		}
 
-		if (page == 1) {
-			for (int x = 1; x < min; x++) {
-				if (x > tot) {
+		if(page == 1){
+			for(int x = 1; x < min; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
-				if (Files.social.getString("social.player_" + x).equalsIgnoreCase(player)) {
+				if(Files.social.getString("social.player_" + x).equalsIgnoreCase(player)){
 					lore.add(x + "");
 					items.add(SkullManager.getSkull(Files.social.getString("social.type_" + x), ChatColor.AQUA + WordUtils.capitalizeFully(Files.social.getString("social.type_" + x) + ChatColor.BLACK + " - " + ChatColor.GREEN + WordUtils.capitalizeFully(Files.social.getString("social.player_" + x))), lore));
 					lore.remove(2);
@@ -96,15 +96,15 @@ public class MenuItems {
 			}
 		}
 
-		if (page >= 2) {
-			for (int x = (min * page) - min; x < min * page; x++) {
-				if (x > tot) {
+		if(page >= 2){
+			for(int x = (min * page) - min; x < min * page; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
-				if (Files.social.getString("social.player_" + x).equalsIgnoreCase(player)) {
+				if(Files.social.getString("social.player_" + x).equalsIgnoreCase(player)){
 					lore.add(x + "");
 					items.add(SkullManager.getSkull(Files.social.getString("social.type_" + x), ChatColor.AQUA + WordUtils.capitalizeFully(Files.social.getString("social.type_" + x) + ChatColor.BLACK + " - " + ChatColor.GREEN + WordUtils.capitalizeFully(Files.social.getString("social.player_" + x))), lore));
 					lore.remove(2);
@@ -128,21 +128,21 @@ public class MenuItems {
 
 		lore.add(ChatColor.GOLD + "Left Click to view");
 
-		if (p.hasPermission("socialgui.admin")) {
+		if(p.hasPermission("socialgui.admin")){
 			lore.add(ChatColor.RED + "Shift + Right Click to delete");
-		} else {
-			lore.add("");
+		}else{
+			lore.add(ChatColor.RED + "Right Click to report");
 		}
 
-		if (page == 1) {
-			for (int x = 1; x < min; x++) {
-				if (x > tot) {
+		if(page == 1){
+			for(int x = 1; x < min; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
-				if (Files.social.getString("social.type_" + x).equalsIgnoreCase(type)) {
+				if(Files.social.getString("social.type_" + x).equalsIgnoreCase(type)){
 					lore.add(x + "");
 					items.add(SkullManager.getSkull(Files.social.getString("social.type_" + x), ChatColor.AQUA + WordUtils.capitalizeFully(Files.social.getString("social.type_" + x) + ChatColor.BLACK + " - " + ChatColor.GREEN + WordUtils.capitalizeFully(Files.social.getString("social.player_" + x))), lore));
 					lore.remove(2);
@@ -152,15 +152,15 @@ public class MenuItems {
 			}
 		}
 
-		if (page >= 2) {
-			for (int x = (min * page) - min; x < min * page; x++) {
-				if (x > tot) {
+		if(page >= 2){
+			for(int x = (min * page) - min; x < min * page; x++){
+				if(x > tot){
 					break;
 				}
-				if (Files.social.getString("social.type_" + x) == null) {
+				if(Files.social.getString("social.type_" + x) == null){
 					continue;
 				}
-				if (Files.social.getString("social.type_" + x).equalsIgnoreCase(type)) {
+				if(Files.social.getString("social.type_" + x).equalsIgnoreCase(type)){
 					lore.add(x + "");
 					items.add(SkullManager.getSkull(Files.social.getString("social.type_" + x), ChatColor.AQUA + WordUtils.capitalizeFully(Files.social.getString("social.type_" + x) + ChatColor.BLACK + " - " + ChatColor.GREEN + WordUtils.capitalizeFully(Files.social.getString("social.player_" + x))), lore));
 					lore.remove(2);

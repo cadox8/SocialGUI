@@ -6,7 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.cadox8.socialgui.cmd.Help;
 import com.gmail.cadox8.socialgui.events.Chat;
-import com.gmail.cadox8.socialgui.events.Interact;
+import com.gmail.cadox8.socialgui.events.IGUI;
+import com.gmail.cadox8.socialgui.events.IReport;
 import com.gmail.cadox8.socialgui.files.Files;
 import com.gmail.cadox8.socialgui.utils.Checks;
 import com.gmail.cadox8.socialgui.utils.Messages;
@@ -65,8 +66,9 @@ public class SocialGUI extends JavaPlugin {
 	}
 
 	private void registerEvents(){
-		new Interact(this);
+		new IGUI(this);
 		new Chat(this);
+		new IReport(this);
 	}
 
 	public static SocialGUI getPlugin(){

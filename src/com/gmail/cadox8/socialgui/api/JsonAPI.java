@@ -1,4 +1,4 @@
-package com.gmail.cadox8.socialgui.apis;
+package com.gmail.cadox8.socialgui.api;
 
 import org.bukkit.entity.Player;
 

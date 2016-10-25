@@ -5,8 +5,8 @@ import com.gmail.cadox8.socialgui.events.Chat;
 public class Checks {
 
 	public static boolean existType(String type){
-		for (ItemsLink il : ItemsLink.values()) {
-			if (il.toString().toLowerCase().equalsIgnoreCase(type)) {
+		for(ItemsLink il : ItemsLink.values()){
+			if(il.toString().toLowerCase().equalsIgnoreCase(type)){
 				return true;
 			}
 		}
@@ -14,11 +14,11 @@ public class Checks {
 	}
 
 	public static boolean isInteger(String s){
-		try {
+		try{
 			Integer.parseInt(s);
-		} catch (NumberFormatException e) {
+		}catch(NumberFormatException e){
 			return false;
-		} catch (NullPointerException e) {
+		}catch(NullPointerException e){
 			return false;
 		}
 		return true;
