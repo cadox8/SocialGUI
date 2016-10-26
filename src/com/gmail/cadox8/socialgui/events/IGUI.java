@@ -20,6 +20,9 @@ public class IGUI implements Listener {
 
 	private SocialGUI plugin;
 
+	private GUI gui = new GUI();
+	private Report report = new Report();
+
 	public IGUI(SocialGUI Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
@@ -40,14 +43,14 @@ public class IGUI implements Listener {
 			e.setCancelled(true);
 
 			//Search
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getUserLinks(p).getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gui.getUserLinks(p).getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
-				GUI.openGUIPlayer(p, GUI.playerPage.get(p), p.getName());
+				gui.openGUIPlayer(p, GUI.playerPage.get(p), p.getName());
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getUserSearch().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gui.getUserSearch().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -55,7 +58,7 @@ public class IGUI implements Listener {
 				p.sendMessage(Messages.prefix + ChatColor.GOLD + "Please, put the user name to search it");
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getTypeSearch().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gui.getTypeSearch().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -64,21 +67,21 @@ public class IGUI implements Listener {
 			}
 
 			//Pages
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getNextItem().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gui.getNextItem().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
 				GUI.playerPage.put(p, GUI.playerPage.get(p) + 1);
-				GUI.openGUI(p, GUI.playerPage.get(p));
+				gui.openGUI(p, GUI.playerPage.get(p));
 				return;
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(GUI.getPrevItem().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(gui.getPrevItem().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
 				GUI.playerPage.put(p, GUI.playerPage.get(p) - 1);
-				GUI.openGUI(p, GUI.playerPage.get(p));
+				gui.openGUI(p, GUI.playerPage.get(p));
 				return;
 			}
 
@@ -101,7 +104,7 @@ public class IGUI implements Listener {
 
 				int id = Integer.parseInt(e.getCurrentItem().getItemMeta().getLore().get(2));
 
-				Report.openReportGUI(p, id);
+				report.openReportGUI(p, id);
 			}
 
 			if(e.getCurrentItem().getItemMeta().getLore().get(2) != null && e.getClick() == ClickType.LEFT){

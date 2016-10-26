@@ -21,6 +21,8 @@ public class Chat implements Listener {
 
 	public static ArrayList<Player> onSearch = new ArrayList<Player>();
 
+	private GUI gui = new GUI();
+
 	public Chat(SocialGUI Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
@@ -80,9 +82,9 @@ public class Chat implements Listener {
 
 			for(ItemsLink il : ItemsLink.values()){
 				if(il.toString().toLowerCase().equalsIgnoreCase(search)){
-					GUI.openGUIType(p, GUI.playerPage.get(p), il.toString());
+					gui.openGUIType(p, GUI.playerPage.get(p), il.toString());
 				}else{
-					GUI.openGUIPlayer(p, GUI.playerPage.get(p), search);
+					gui.openGUIPlayer(p, GUI.playerPage.get(p), search);
 				}
 				onSearch.remove(p);
 			}

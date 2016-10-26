@@ -20,9 +20,9 @@ public class GUI {
 
 	public static HashMap<Player, Integer> playerPage = new HashMap<Player, Integer>();
 
-	private static MenuItems mi = new MenuItems();
+	private MenuItems mi = new MenuItems();
 
-	public static void openGUI(Player p, int page){
+	public void openGUI(Player p, int page){
 		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")));
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsPerPage(p, page);
@@ -55,7 +55,7 @@ public class GUI {
 		p.openInventory(inv);
 	}
 
-	public static void openGUIPlayer(Player p, int page, String player){
+	public void openGUIPlayer(Player p, int page, String player){
 		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")) + ChatColor.BLACK + "(Search: " + ChatColor.AQUA + player + ChatColor.BLACK + ")");
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsByPlayer(p, page, player);
@@ -88,7 +88,7 @@ public class GUI {
 		p.openInventory(inv);
 	}
 
-	public static void openGUIType(Player p, int page, String type){
+	public void openGUIType(Player p, int page, String type){
 		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")) + ChatColor.BLACK + "(Search: " + ChatColor.AQUA + type + ChatColor.BLACK + ")");
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsByType(p, page, type);
@@ -121,7 +121,7 @@ public class GUI {
 		p.openInventory(inv);
 	}
 
-	public static ItemStack getNextItem(){
+	public ItemStack getNextItem(){
 		ItemStack i = new ItemStack(Material.ARROW);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN + "Next Page");
@@ -130,7 +130,7 @@ public class GUI {
 		return i;
 	}
 
-	public static ItemStack getPrevItem(){
+	public ItemStack getPrevItem(){
 		ItemStack i = new ItemStack(Material.ARROW);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Prev Page");
@@ -139,7 +139,7 @@ public class GUI {
 		return i;
 	}
 
-	public static ItemStack getUserSearch(){
+	public ItemStack getUserSearch(){
 		ItemStack i = new ItemStack(Material.SIGN);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.RED + "Search By Player Name");
@@ -148,13 +148,13 @@ public class GUI {
 		return i;
 	}
 
-	public static ItemStack getTypeSearch(){
+	public ItemStack getTypeSearch(){
 		ItemStack i = new SkullMaker().withSkinUrl("http://textures.minecraft.net/texture/843a77fd2ab245303ed2d1b26563ebc4653af4139a2b3daef15a8cc7defd0").withName(ChatColor.RED + "Search By Type").build();
 
 		return i;
 	}
 
-	public static ItemStack getUserLinks(Player p){
+	public ItemStack getUserLinks(Player p){
 		ItemStack i = new ItemStack(Material.SKULL, 1, (short) 3);
 		SkullMeta im = (SkullMeta) i.getItemMeta();
 		im.setOwner(p.getName());

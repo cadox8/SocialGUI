@@ -21,6 +21,8 @@ import com.gmail.cadox8.socialgui.utils.SkullManager;
 
 public class Help implements CommandExecutor {
 
+	private GUI gui = new GUI();
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player p = (Player) sender;
 
@@ -29,7 +31,7 @@ public class Help implements CommandExecutor {
 				Files.saveFiles();
 				GUI.playerPage.put(p, 1);
 
-				GUI.openGUI(p, GUI.playerPage.get(p));
+				gui.openGUI(p, GUI.playerPage.get(p));
 				return true;
 			}
 

@@ -18,6 +18,8 @@ public class IReport implements Listener {
 
 	private SocialGUI plugin;
 
+	private Report report = new Report();
+
 	public IReport(SocialGUI Main){
 		this.plugin = Main;
 		this.plugin.getServer().getPluginManager().registerEvents(this, this.plugin);
@@ -26,7 +28,7 @@ public class IReport implements Listener {
 	@EventHandler
 	public void onInteractGUI(InventoryClickEvent e){
 		final Player p = (Player) e.getWhoClicked();
-		int id = Report.getID();
+		int id = report.getID();
 
 		if(e.getInventory().getName().contains(ChatColor.RED + "Report Menu")){
 			if(e.getCurrentItem() == null){
@@ -36,7 +38,7 @@ public class IReport implements Listener {
 				return;
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Report.getBadPage().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(report.getBadPage().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -55,12 +57,12 @@ public class IReport implements Listener {
 
 				Files.rep.set("id", id2);
 				Files.rep.set("report_" + id2, id);
-				Files.rep.set("report_" + id2 + ".Reason", Report.getBadPage().getItemMeta().getDisplayName());
+				Files.rep.set("report_" + id2 + ".Reason", report.getBadPage().getItemMeta().getDisplayName());
 
 				Files.saveFiles();
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Report.getSpam().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(report.getSpam().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -79,12 +81,12 @@ public class IReport implements Listener {
 
 				Files.rep.set("id", id2);
 				Files.rep.set("report_" + id2, id);
-				Files.rep.set("report_" + id2 + ".Reason", Report.getSpam().getItemMeta().getDisplayName());
+				Files.rep.set("report_" + id2 + ".Reason", report.getSpam().getItemMeta().getDisplayName());
 
 				Files.saveFiles();
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Report.getOffensiveImage().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(report.getOffensiveImage().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -103,12 +105,12 @@ public class IReport implements Listener {
 
 				Files.rep.set("id", id2);
 				Files.rep.set("report_" + id2, id);
-				Files.rep.set("report_" + id2 + ".Reason", Report.getOffensiveImage().getItemMeta().getDisplayName());
+				Files.rep.set("report_" + id2 + ".Reason", report.getOffensiveImage().getItemMeta().getDisplayName());
 
 				Files.saveFiles();
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Report.getBrokenLink().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(report.getBrokenLink().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -127,12 +129,12 @@ public class IReport implements Listener {
 
 				Files.rep.set("id", id2);
 				Files.rep.set("report_" + id2, id);
-				Files.rep.set("report_" + id2 + ".Reason", Report.getBrokenLink().getItemMeta().getDisplayName());
+				Files.rep.set("report_" + id2 + ".Reason", report.getBrokenLink().getItemMeta().getDisplayName());
 
 				Files.saveFiles();
 			}
 
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(Report.getNoCorrect().getItemMeta().getDisplayName())){
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(report.getNoCorrect().getItemMeta().getDisplayName())){
 				e.setCancelled(true);
 				p.closeInventory();
 
@@ -151,7 +153,7 @@ public class IReport implements Listener {
 
 				Files.rep.set("id", id2);
 				Files.rep.set("report_" + id2, id);
-				Files.rep.set("report_" + id2 + ".Reason", Report.getNoCorrect().getItemMeta().getDisplayName());
+				Files.rep.set("report_" + id2 + ".Reason", report.getNoCorrect().getItemMeta().getDisplayName());
 
 				Files.saveFiles();
 			}

@@ -11,9 +11,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Report {
 
-	private static int id;
+	private int id;
 
-	public static void openReportGUI(Player p, int id){
+	public void openReportGUI(Player p, int id){
 		Inventory inv = Bukkit.createInventory(null, InventoryType.HOPPER, ChatColor.RED + "Report Menu");
 
 		inv.setItem(0, getBadPage());
@@ -22,15 +22,15 @@ public class Report {
 		inv.setItem(3, getBrokenLink());
 		inv.setItem(4, getNoCorrect());
 
-		Report.id = id;
+		this.id = id;
 		p.openInventory(inv);
 	}
 
-	public static int getID(){
+	public int getID(){
 		return id;
 	}
 
-	public static ItemStack getBadPage(){
+	public ItemStack getBadPage(){
 		ItemStack i = new ItemStack(Material.WOOL, 1, (short) 7);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.RED + "Bad Page");
@@ -39,7 +39,7 @@ public class Report {
 		return i;
 	}
 
-	public static ItemStack getSpam(){
+	public ItemStack getSpam(){
 		ItemStack i = new ItemStack(Material.SIGN);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA + "Spam");
@@ -48,7 +48,7 @@ public class Report {
 		return i;
 	}
 
-	public static ItemStack getOffensiveImage(){
+	public ItemStack getOffensiveImage(){
 		ItemStack i = new ItemStack(Material.PAINTING);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.RED + "Offensive Image");
@@ -57,7 +57,7 @@ public class Report {
 		return i;
 	}
 
-	public static ItemStack getBrokenLink(){
+	public ItemStack getBrokenLink(){
 		ItemStack i = new ItemStack(Material.REDSTONE);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.RED + "Broken Link");
@@ -66,7 +66,7 @@ public class Report {
 		return i;
 	}
 
-	public static ItemStack getNoCorrect(){
+	public ItemStack getNoCorrect(){
 		ItemStack i = new ItemStack(Material.BARRIER);
 		ItemMeta im = i.getItemMeta();
 		im.setDisplayName(ChatColor.RED + "No Correct Type-Link");
