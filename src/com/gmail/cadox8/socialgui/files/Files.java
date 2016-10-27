@@ -19,8 +19,10 @@ public class Files {
 	public static File fileRep = new File("plugins/SocialGUI", "reports.yml");
 	public static YamlConfiguration rep = YamlConfiguration.loadConfiguration(fileRep);
 
+	private static BlockLinks bl = new BlockLinks();
+
 	public static void setupFiles(){
-		if (!fileConfig.exists()) {
+		if(!fileConfig.exists()){
 			fileConfig.mkdir();
 
 			cfg.set("GUI.Name", "&cSocialGUI");
@@ -37,14 +39,14 @@ public class Files {
 			cfg.set("Messages.giveSkull", "&2You recived &c%type%'s &2head");
 			cfg.set("Messages.notAllowedIP", "&cSorry, but this ip is not allowed");
 
-			cfg.set("blocked", BlockLinks.getDefaultLinks());
+			cfg.set("blocked", bl.getDefaultLinks());
 		}
-		if (!fileSocial.exists()) {
+		if(!fileSocial.exists()){
 			fileSocial.mkdir();
 
 			social.set("id", 0);
 		}
-		if (!fileRep.exists()) {
+		if(!fileRep.exists()){
 			fileRep.mkdir();
 
 			rep.set("id", 0);
@@ -53,14 +55,14 @@ public class Files {
 	}
 
 	public static void saveFiles(){
-		try {
+		try{
 			cfg.save(fileConfig);
 			cfg.load(fileConfig);
 			social.save(fileSocial);
 			social.load(fileSocial);
 			rep.save(fileRep);
 			rep.load(fileRep);
-		} catch (IOException | InvalidConfigurationException e) {
+		}catch(IOException | InvalidConfigurationException e){
 			e.printStackTrace();
 		}
 	}

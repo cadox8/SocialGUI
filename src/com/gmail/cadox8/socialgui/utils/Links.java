@@ -7,11 +7,11 @@ import java.net.URISyntaxException;
 
 public class Links {
 
-	public static void openURLBrowser(String link){
-		try {
+	public void openURLBrowser(String link){
+		try{
 			Desktop d = Desktop.getDesktop();
 			d.browse(new URI(link));
-		} catch (IOException | URISyntaxException e) {
+		}catch(IOException | URISyntaxException e){
 			e.printStackTrace();
 		}
 	}

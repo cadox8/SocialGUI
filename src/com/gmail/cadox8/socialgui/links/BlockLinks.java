@@ -7,20 +7,20 @@ import com.gmail.cadox8.socialgui.files.Files;
 
 public class BlockLinks {
 
-	public static List<String> getBlockedLinks(){
+	public List<String> getBlockedLinks(){
 		return Files.cfg.getStringList("blocked");
 	}
 
-	public static boolean isBlockedLink(String link){
-		if (getBlockedLinks().contains(link)) {
+	public boolean isBlockedLink(String link){
+		if(getBlockedLinks().contains(link)){
 			return true;
 		}
 
-		for (String s : getBlockedLinks()) {
-			if (s.contains(link)) {
+		for(String s : getBlockedLinks()){
+			if(s.contains(link)){
 				return true;
 			}
-			if (link.contains(s)) {
+			if(link.contains(s)){
 				return true;
 			}
 		}
@@ -28,7 +28,7 @@ public class BlockLinks {
 		return false;
 	}
 
-	public static List<String> getDefaultLinks(){
+	public List<String> getDefaultLinks(){
 		List<String> links = new ArrayList<String>();
 
 		//TODO: Add more default links

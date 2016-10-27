@@ -22,6 +22,7 @@ public class IGUI implements Listener {
 
 	private GUI gui = new GUI();
 	private Report report = new Report();
+	private Links links = new Links();
 
 	public IGUI(SocialGUI Main){
 		this.plugin = Main;
@@ -115,7 +116,7 @@ public class IGUI implements Listener {
 				String type = WordUtils.capitalizeFully(Files.social.getString("social.type_" + id));
 				String player = WordUtils.capitalizeFully(Files.social.getString("social.player_" + id));
 
-				Links.openURLBrowser(Files.social.getString("social.link_" + id));
+				links.openURLBrowser(Files.social.getString("social.link_" + id));
 
 				p.sendMessage(Messages.prefix + ChatColor.RED + "WARNING: The server is not responsable about the links posted in this plugin. We will check all to prevent extrange links. Also, you can report them if you right click on them");
 

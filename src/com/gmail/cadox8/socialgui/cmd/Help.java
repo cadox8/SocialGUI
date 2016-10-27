@@ -22,6 +22,7 @@ import com.gmail.cadox8.socialgui.utils.SkullManager;
 public class Help implements CommandExecutor {
 
 	private GUI gui = new GUI();
+	private BlockLinks bl = new BlockLinks();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
 		Player p = (Player) sender;
@@ -99,7 +100,7 @@ public class Help implements CommandExecutor {
 						return true;
 					}
 
-					if(BlockLinks.isBlockedLink(link)){
+					if(bl.isBlockedLink(link)){
 						p.sendMessage(Messages.blockedLink.replace("link", link));
 						return true;
 					}
