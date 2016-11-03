@@ -83,10 +83,15 @@ public class Chat implements Listener {
 			for(ItemsLink il : ItemsLink.values()){
 				if(il.toString().toLowerCase().equalsIgnoreCase(search)){
 					gui.openGUIType(p, GUI.playerPage.get(p), il.toString());
+					onSearch.remove(p);
+					e.setCancelled(true);
+					break;
 				}else{
 					gui.openGUIPlayer(p, GUI.playerPage.get(p), search);
+					onSearch.remove(p);
+					e.setCancelled(true);
+					break;
 				}
-				onSearch.remove(p);
 			}
 		}
 	}

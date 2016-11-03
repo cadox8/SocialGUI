@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import com.gmail.cadox8.socialgui.files.Files;
 import com.gmail.cadox8.socialgui.utils.Messages;
@@ -39,7 +38,7 @@ public class GUI {
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+		inv.setItem(49, getUserLinks(p));
 
 		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
@@ -56,7 +55,7 @@ public class GUI {
 	}
 
 	public void openGUIPlayer(Player p, int page, String player){
-		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")) + ChatColor.BLACK + "(Search: " + ChatColor.AQUA + player + ChatColor.BLACK + ")");
+		Inventory inv = Bukkit.createInventory(null, 54, ChatColor.translateAlternateColorCodes('&', Files.cfg.getString("GUI.Name")));
 		int tot = Files.social.getInt("id");
 		List<ItemStack> items = mi.getItemsByPlayer(p, page, player);
 
@@ -72,7 +71,7 @@ public class GUI {
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+		inv.setItem(49, getUserLinks(p));
 
 		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
@@ -105,7 +104,7 @@ public class GUI {
 		inv.setItem(45, getTypeSearch());
 		inv.setItem(53, getUserSearch());
 
-		inv.setItem(48, getUserLinks(p)); //TODO: Change loc
+		inv.setItem(49, getUserLinks(p));
 
 		if(page == 1 && Math.round(tot / 45) >= 1){
 			inv.setItem(50, getNextItem());
@@ -155,12 +154,6 @@ public class GUI {
 	}
 
 	public ItemStack getUserLinks(Player p){
-		ItemStack i = new ItemStack(Material.SKULL, 1, (short) 3);
-		SkullMeta im = (SkullMeta) i.getItemMeta();
-		im.setOwner(p.getName());
-		im.setDisplayName(ChatColor.GOLD + "Get my links");
-		i.setItemMeta(im);
-
-		return i;
+		return new SkullMaker().withOwner(p.getName()).withName(ChatColor.GOLD + "Get my links").build();
 	}
 }
